@@ -2,22 +2,10 @@ body{
 	margin: 0;
 	padding: 0;
 }
-/*
-<nav class="primary_menu">
-<ul class="menu">
-	<li class ="menu_item"><a class="menu_item_link">Home</a></li>
-	<li class ="menu_item"><a class="menu_item_link">Home</a></li>
-	<li class ="menu_item"><a class="menu_item_link">Home</a></li>
-</ul>
-</nav>
-*/
-
 .primary_menu{
 	background:red;
 }
-
 .primary_menu .menu {
-	width: 40%;
 	display:flex;
 	list-style:none;
 	justify-content: flex-start;

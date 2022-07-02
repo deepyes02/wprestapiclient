@@ -1,7 +1,9 @@
-<?php include('header.php');
-echo "Add a new post";
-?>
+<?php include('header.php'); ?>
 <div class="container">
+	<div id="alert_outer" class="alert alert-warning alert-dismissible fade show" role="alert">
+		<strong>Holy guacamole!</strong> You should check in on some of those fields below.
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
 	<form>
 		<div class="form-row">
 			<div class="form-group col-md-6">
@@ -36,27 +38,47 @@ echo "Add a new post";
 	const mytextarea = document.getElementById('mytextarea');
 	const publishStatus = document.getElementById('publishStatus');
 	const postSubmitBtn = document.getElementById('postSubmitBtn');
+	const notification_box = document.getElementById('alert_outer');
+	notification_box.style.display = "none";
 
-	const username = 'deepyes02';
-	const password = 'oH1r sDnI xT7v ilc1 YBfh DUOw';
-	const encoded = "Basic " + btoa(username + ':' + password);
 
 	postSubmitBtn.addEventListener('click', (e) => {
 		e.preventDefault();
-		fetch('https://wprestapi.test/wp-json/wp/v2/posts', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded',
-				'Authorization': 'Basic ' + btoa('deepyes02:oH1r sDnI xT7v ilc1 YBfh DUOw')
-			},
-			body: 'title=New Title'
-		});
-
+		if (inputTitle1.value && inputSlug1.value && mytextarea.value && publishStatus.value) {
+			fetch('https://wprestapi.test/wp-json/wp/v2/posts', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						'Authorization': 'Basic ' + btoa('deepyes02:oH1r sDnI xT7v ilc1 YBfh DUOw')
+					},
+					body: JSON.stringify({
+						"title" : "Hello world",
+						"content" : "once upon a time there was a jungle",
+						"excerpt" : "some excerpt",
+						"slug"		: 'hello-world',
+						"status"	: "publish"
+					}),
+				})
+				.then(response => {
+					if (response.ok == false) {
+						notification_box.style.display = "block";
+						notification_box.innerHTML = "<h2>Response invalid please try again</h2>";
+					}
+					console.log(response);
+					return response.json()
+				})
+				.then(data => {
+					notification_box.style.display = "block";
+					notification_box.innerHTML = "<h2>Success, data posted</h2>";
+					console.log(data);
+				})
+		} else {
+			notification_box.style.display = "block";
+			notification_box.innerHTML = "<h2>Please provide all input fields</h2>";
+		}
 
 	})
 </script>
 
 
-
-<?php
-include('footer.php');
+<?php include('footer.php'); ?>

@@ -1,0 +1,44 @@
+body{
+	margin: 0;
+	padding: 0;
+}
+/*
+<nav class="primary_menu">
+<ul class="menu">
+	<li class ="menu_item"><a class="menu_item_link">Home</a></li>
+	<li class ="menu_item"><a class="menu_item_link">Home</a></li>
+	<li class ="menu_item"><a class="menu_item_link">Home</a></li>
+</ul>
+</nav>
+*/
+
+.primary_menu{
+	background:red;
+}
+
+.primary_menu .menu {
+	width: 40%;
+	display:flex;
+	list-style:none;
+	justify-content: flex-start;
+	gap: 20px;
+	padding:10px;
+}
+.primary_menu .menu .menu_item .menu_item_link {
+	text-decoration: none;
+	text-transform: uppercase;
+	color: white;
+	font-weight:800;
+	font-size:1.4rem;
+	letter-spacing: 0.2rem;
+	padding:10px;
+}
+
+.primary_menu .menu .menu_item .menu_item_link:hover{
+	color: rgb(195, 148, 148);
+}
+
+
+.primary_menu .menu .menu_item .menu_item_link:active{
+	color: rgb(130, 234, 130);
+}

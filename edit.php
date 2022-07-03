@@ -22,8 +22,8 @@
 			<div class="form-group col-md-6">
 				<label for="publishStatus">Publish Status (Default published)</label>
 				<select id="publishStatus" class="form-control">
-					<option selected>Published</option>
-					<option>Draft</option>
+					<option selected value="publish">Published</option>
+					<option value="draft">Draft</option>
 				</select>
 			</div>
 		</div>
@@ -52,11 +52,10 @@
 						'Authorization': 'Basic ' + btoa('deepyes02:oH1r sDnI xT7v ilc1 YBfh DUOw')
 					},
 					body: JSON.stringify({
-						"title" : "Hello world",
-						"content" : "once upon a time there was a jungle",
-						"excerpt" : "some excerpt",
-						"slug"		: 'hello-world',
-						"status"	: "publish"
+						"title" : inputTitle1.value,
+						"content" : mytextarea.value,
+						"slug"		: inputSlug1.value,
+						"status"	: publishStatus.value
 					}),
 				})
 				.then(response => {

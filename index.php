@@ -1,33 +1,43 @@
 <?php include('header.php'); ?>
 <div id="root"></div>
+
 <script type="text/javascript">
-	document.title = "REST API FRONTEND"
+	document.title = "REST API FRONTEND";
+
+	//grab root by id
 	const root = document.querySelector('#root');
+	//send a get Request with Fetach API
 	fetch('https://wprestapi.test/wp-json?_fields=name,description')
-		.then((data) => {
-			if (data.status == 200) {
-				return data.json()
+		.then((response) => {
+			if (response.status == 200) {
+				return response.json()
 			} else console.log('Not success, please try again')
 		})
 		.then((data) => {
 			// console.log(data);
-			root.innerHTML = `<h1>${data.name}</h2>`;
+			root.innerHTML = `<h1>${data.name}</h1>`;
 			root.innerHTML += `<h3>${data.description}</h3>`;
 		})
 		.catch(error => root.innerHTML = error)
 	// ?_fields=id,date,title,excerpt,link,featured_media,fimg_url
-	fetch('https://wprestapi.test/wp-json/wp/v2/posts?_fields=id,date,title,excerpt,link,featured_media,fimg_url')
+
+	
+	// fetch all posts
+	// ?_fields=id,date,title,excerpt,link,featured_media,fimg_url
+	fetch('https://wprestapi.test/wp-json/wp/v2/posts')
 		.then((data) => {
 			if (data.status == 200) {
 				return data.json()
-			} else console.log('Not success, please try again')
+			} else {
+				console.log('Not success, please try again');
+				return;
+			}
 		})
 		.then((data) => {
 			// ._embedded['wp:featuredmedia']['0'].source_url
 			// console.log(data)
 			root.innerHTML += `<ul>`;
 			data.forEach(element => {
-				// console.log(element);
 				let postID = element.id;
 				let published = new Date(element.date);
 				root.innerHTML += `<div class="card mt-5" style="width: 18rem;">

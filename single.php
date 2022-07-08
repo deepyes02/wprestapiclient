@@ -1,1 +1,3 @@
-<?php echo "Display Single POst";
+<?php include('header.php'); ?>
+
+<?php include('footer.php'); ?>
